@@ -7,6 +7,7 @@ import com.jdkd.academy.AcademyGame;
 import com.jdkd.academy.screens.StageBasedScreen;
 import com.jdkd.academy.screens.components.transitions.ScreenTransitionClickListener;
 import com.jdkd.academy.screens.createGame.CreateGameScreen;
+import com.jdkd.academy.screens.loadGame.LoadGameScreen;
 
 public class MainMenuScreen extends StageBasedScreen {
 
@@ -28,6 +29,7 @@ public class MainMenuScreen extends StageBasedScreen {
         startButton.addListener(new ScreenTransitionClickListener(getGame(), new CreateGameScreen(getGame())));
         TextButton optionsButton = new TextButton("Options", getSkin());
         TextButton loadButton = new TextButton("Load", getSkin());
+        loadButton.addListener(new ScreenTransitionClickListener(getGame(), new LoadGameScreen(getGame())));
 
         rootTable.add().height(topHeight);
         rootTable.add();

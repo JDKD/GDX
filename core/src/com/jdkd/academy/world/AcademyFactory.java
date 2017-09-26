@@ -3,8 +3,13 @@ package com.jdkd.academy.world;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class AcademyFactory {
 
@@ -68,5 +73,19 @@ public class AcademyFactory {
 
     public String getSaveFileName(String name){
         return SAVE_LOC + name + "/" + name + ".json";
+    }
+
+    public List<Academy> loadAllAcademies(){
+        FileHandle saveDir = Gdx.files.local(SAVE_LOC);
+        String[] fileExtensions = new String[] {"json"};
+        Collection<File> saves = FileUtils.listFiles(saveDir.file(), fileExtensions, true);
+
+        List<Academy> academies = new ArrayList<>();
+
+        for(File file : saves){
+            academies.add(loadAcademyFromSave(file.getName().split("\\.")[0]));
+        }
+
+        return academies;
     }
 }
