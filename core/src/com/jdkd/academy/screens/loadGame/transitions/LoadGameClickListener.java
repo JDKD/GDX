@@ -1,6 +1,5 @@
 package com.jdkd.academy.screens.loadGame.transitions;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.jdkd.academy.AcademyGame;
