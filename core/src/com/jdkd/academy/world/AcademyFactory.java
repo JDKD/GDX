@@ -3,6 +3,7 @@ package com.jdkd.academy.world;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jdkd.academy.world.entities.Player;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -57,6 +58,10 @@ public class AcademyFactory {
     private Academy createAcademy(String name) {
         FileHandle saveDir = Gdx.files.local(SAVE_LOC + name);
         Academy academy = new Academy(name);
+        Player player = new Player();
+        player.setX(300);
+        player.setY(300);
+        academy.setPlayer(player);
 
         if (!saveDir.exists()) {
             saveDir.mkdirs();
@@ -69,6 +74,21 @@ public class AcademyFactory {
         }
 
         return academy;
+    }
+
+    public void saveAcademy(Academy academy){
+        FileHandle saveDir = Gdx.files.local(SAVE_LOC + academy.getName());
+
+        if (!saveDir.exists()) {
+            saveDir.mkdirs();
+        }
+
+        FileHandle saveFile = Gdx.files.local(getSaveFileName(academy.getName()));
+        try {
+            new ObjectMapper().writeValue(saveFile.file(), academy);
+        } catch (IOException e) {
+            Gdx.app.exit();
+        }
     }
 
     public String getSaveFileName(String name){
