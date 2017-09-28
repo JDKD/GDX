@@ -1,24 +1,27 @@
 package com.jdkd.academy.world.entities;
 
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.jdkd.academy.utils.input.events.keyboard.KeyChangeListener;
 import com.jdkd.academy.utils.input.events.keyboard.KeyStateChangedEvent;
 import com.jdkd.academy.utils.input.events.keyboard.KeyStateChangedEventHandler;
 
-public class Player implements KeyChangeListener {
+public class Player extends Image implements KeyChangeListener {
 
     private static final int SPEED = 500;
+
     private int vX, vY;
-    private int x, y;
 
     public Player() {
+        super(new Texture("badlogic.jpg"));
         KeyStateChangedEventHandler.getInstance().addListener(this);
     }
 
-
-    public void update(float delta) {
-        this.x += vX*delta;
-        this.y += vY*delta;
+    @Override
+    public void act(float delta) {
+        super.act(delta);
+        moveBy(vX * delta, vY * delta);
     }
 
     @Override
@@ -39,21 +42,5 @@ public class Player implements KeyChangeListener {
                 vY -= SPEED * modifier;
                 break;
         }
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 }

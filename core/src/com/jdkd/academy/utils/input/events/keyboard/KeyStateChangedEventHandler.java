@@ -10,11 +10,9 @@ public class KeyStateChangedEventHandler implements EventHandler<KeyStateChanged
     private static final KeyStateChangedEventHandler instance = new KeyStateChangedEventHandler();
 
     private Set<KeyChangeListener> listeners;
-    private Set<KeyChangeListener> toRemove;
 
     private KeyStateChangedEventHandler() {
         listeners = new HashSet<>();
-        toRemove = new HashSet<>();
     }
 
     public static KeyStateChangedEventHandler getInstance() {
@@ -26,15 +24,7 @@ public class KeyStateChangedEventHandler implements EventHandler<KeyStateChanged
     }
 
     public void removeListener(KeyChangeListener listener) {
-        toRemove.add(listener);
-    }
-
-    private void removeListeners(){
-        for(KeyChangeListener listener : toRemove){
-            listeners.remove(listener);
-        }
-
-        toRemove.clear();
+        listeners.remove(listener);
     }
 
     @Override
@@ -42,7 +32,6 @@ public class KeyStateChangedEventHandler implements EventHandler<KeyStateChanged
         for (KeyChangeListener listener : listeners) {
             listener.onKeyStateChanged(event);
         }
-        removeListeners();
     }
 
     @Override
