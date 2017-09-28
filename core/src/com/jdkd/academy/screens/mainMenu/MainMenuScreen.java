@@ -5,6 +5,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import com.jdkd.academy.AcademyGame;
 import com.jdkd.academy.screens.StageBasedScreen;
+import com.jdkd.academy.screens.components.buttons.ExitGameButton;
+import com.jdkd.academy.screens.components.buttons.screenTransition.ScreenTransitionButton;
+import com.jdkd.academy.screens.createGame.CreateGameScreen;
 
 public class MainMenuScreen extends StageBasedScreen {
 
@@ -21,8 +24,8 @@ public class MainMenuScreen extends StageBasedScreen {
         Value buttonWidth = Value.percentWidth(0.3f, rootTable);
         Value buttonGap = Value.percentWidth(0.025f, rootTable);
 
-        TextButton closeButton = new TextButton("X", getSkin());
-        TextButton startButton = new TextButton("Start", getSkin());
+        TextButton closeButton = new ExitGameButton();
+        TextButton startButton = new ScreenTransitionButton("Start", getGame(), new CreateGameScreen(getGame()));
         TextButton optionsButton = new TextButton("Options", getSkin());
         TextButton loadButton = new TextButton("Load", getSkin());
 
